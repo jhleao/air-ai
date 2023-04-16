@@ -7,7 +7,9 @@ import json
 
 
 class GetAirQualityTool(BaseTool):
-    def __init__(self):
+    collected_data: dict[str, List[AirDataPoint]] = {}
+
+    def __init__(self, collected_data: dict[str, List[AirDataPoint]] = {}):
         super().__init__(
             name="get-air-quality",
             description=""""
@@ -16,6 +18,8 @@ class GetAirQualityTool(BaseTool):
             Input must be JSON formatted with one property called "place" and one called "date", in ISO-8601 format.
             """,
         )
+
+        self.collected_data = collected_data
 
     def _run(self, query: str) -> str:
         raise NotImplementedError(f"{self.name} does not support sync execution")
@@ -42,6 +46,8 @@ class GetAirQualityTool(BaseTool):
 
         lat_lng = await owm.geocode(place_name)
         points = await owm.air_quality(lat_lng, start, end)
+
+        self.collected_data[place_name] = points
 
         latest_point = points[-1]
 

@@ -5,7 +5,7 @@ from langchain.agents import AgentType, initialize_agent, AgentExecutor
 from typing import List
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
-from ..schema import LatLng, AirAiResponse
+from ..schema import LatLng, AirAiResponse, AirDataPoint, LocationAirData
 from .prompts import AIR_QUALITY_AGENT_PROMPT, IDENTITY_INSTRUCTIONS
 from .tools import LocateUserTool, AskPretrainedTool, GetAirQualityTool
 from datetime import datetime
@@ -24,6 +24,12 @@ class AirAiChain(Chain):
 
     llm: BaseLLM
 
+    collected_aqi_data: dict[str, List[AirDataPoint]] = {}
+    """
+    Request-scoped state to hold all relevant AQI data from weather API
+    So we prevent trusting the LLM to juggle this data around, which is unreliable (and expensive).
+    """
+
     agent: AgentExecutor
     agent_prompt: PromptTemplate
 
@@ -32,6 +38,7 @@ class AirAiChain(Chain):
         # TODO Find a better workaround for this.
         super().__init__(
             llm=OpenAI(),  # type: ignore
+            collected_aqi_data={},  # type: ignore
             agent=initialize_agent(llm=OpenAI(), tools=[]),  # type: ignore
             agent_prompt=PromptTemplate(template="", input_variables=[]),  # type: ignore
         )
@@ -44,7 +51,7 @@ class AirAiChain(Chain):
             tools=[
                 LocateUserTool(user_lat_lng),
                 AskPretrainedTool(llm),
-                GetAirQualityTool(),
+                GetAirQualityTool(self.collected_aqi_data),
             ],
             llm=llm,
             agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
@@ -69,9 +76,22 @@ class AirAiChain(Chain):
             print(f"Agent prompt after fromatting\n{context_prompt.to_string()}")
         agent_answer = await self.agent.arun(context_prompt.to_string())
 
-        response = AirAiResponse(answer=agent_answer, facts=[], auxiliary_data=[])
+        auxiliary_data = self.build_auxiliary_data()
+
+        response = AirAiResponse(
+            answer=agent_answer, facts=[], auxiliary_data=auxiliary_data
+        )
 
         return response
+
+    def build_auxiliary_data(self) -> List[LocationAirData]:
+        """Builds a list of LocationAirData objects from the collected_aqi_data state."""
+        if len(self.collected_aqi_data) == 0:
+            return []
+        return [
+            LocationAirData(location_name=location_name, data=data)
+            for location_name, data in self.collected_aqi_data.items()
+        ]
 
     @property
     def input_keys(self) -> List[str]:
