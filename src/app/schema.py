@@ -28,3 +28,7 @@ class LocationAirData(BaseModel):
 
 class PlaceNotFoundError(Exception):
     pass
+
+
+class UnavailableUserLocationError(Exception):
+    pass
