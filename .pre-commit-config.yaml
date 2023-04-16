@@ -16,3 +16,9 @@ repos:
     rev: v0.19.1
     hooks:
       - id: gitlint
+        args:
+          - '--ignore=body-is-missing,T3,CC1'
+          - '--contrib=CT1'
+          - '-cCT1.types=feat,chore,fix,wip,refactor,docs,test,dev,perf'
+          - '-ctitle-max-length.line-length=120'
+          - '--msg-filename'
