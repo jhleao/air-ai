@@ -3,7 +3,6 @@ from collections import defaultdict
 from functools import reduce
 from typing import Callable, List, TypeVar
 
-from ..etc.singleton import singleton
 from ..schema import AirDataPoint
 
 T = TypeVar("T")

@@ -26,6 +26,12 @@ class LocationAirData(BaseModel):
     data: List[AirDataPoint]
 
 
+class AirAiResponse(BaseModel):
+    answer: str
+    facts: List[str] | None
+    auxiliary_data: List[LocationAirData] | None
+
+
 class PlaceNotFoundError(Exception):
     pass
 
