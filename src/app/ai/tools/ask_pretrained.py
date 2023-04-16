@@ -10,7 +10,7 @@ class AskPretrainedTool(BaseTool):
     """
     Agents can get lost in the weeds and fail on basic reasoning.
     This tool is a last resort.
-    Just sends prompts directly to the LLM.
+    Just sends prompts directly to the LLM with added context.
     """
 
     llm: BaseLLM
@@ -18,7 +18,7 @@ class AskPretrainedTool(BaseTool):
     def __init__(self, llm: BaseLLM):
         super().__init__(
             name="fallback",
-            description="Use when no other tool seems adequate, and you cannot figure out what to do.",
+            description="Ask another AI for help when you don't have an adequate tool. Tell them what you need to do. Example: I need to greet the user.",
             llm=llm,  # type: ignore
         )
         self.llm = llm

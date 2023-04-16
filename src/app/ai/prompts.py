@@ -10,7 +10,7 @@ AIR_QUALITY_AGENT_PROMPT = """
 Today is {date}.\n
 You are having a conversation with a human.\n
 HUMAN: {query}
-AI:
+YOU:
 """
 
 THOUGHT_PROMPT = """

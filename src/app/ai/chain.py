@@ -43,7 +43,7 @@ class AirAiChain(Chain):
             agent_prompt=PromptTemplate(template="", input_variables=[]),  # type: ignore
         )
 
-        llm = OpenAI(temperature=0.1, client=None)
+        llm = OpenAI(temperature=0, client=None)
 
         self.llm = llm
 
