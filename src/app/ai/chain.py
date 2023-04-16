@@ -7,7 +7,7 @@ from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from ..schema import LatLng, AirAiResponse
 from .prompts import AIR_QUALITY_AGENT_PROMPT, IDENTITY_INSTRUCTIONS
-from .tools import LocateUserTool, AskPretrainedTool
+from .tools import LocateUserTool, AskPretrainedTool, GetAirQualityTool
 from datetime import datetime
 import os
 
@@ -41,7 +41,11 @@ class AirAiChain(Chain):
         self.llm = llm
 
         self.agent = initialize_agent(
-            tools=[LocateUserTool(user_lat_lng), AskPretrainedTool(llm)],
+            tools=[
+                LocateUserTool(user_lat_lng),
+                AskPretrainedTool(llm),
+                GetAirQualityTool(),
+            ],
             llm=llm,
             agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
             verbose=__DEV__,
