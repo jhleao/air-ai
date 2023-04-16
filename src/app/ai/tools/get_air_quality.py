@@ -3,6 +3,7 @@ from langchain.tools import BaseTool
 from ...weatherapi.api import OpenWeatherMapApi
 from ...schema import AirDataPoint
 from typing import List
+from ...schema import PlaceNotFoundError
 import json
 
 
@@ -46,6 +47,9 @@ class GetAirQualityTool(BaseTool):
 
         lat_lng = await owm.geocode(place_name)
         points = await owm.air_quality(lat_lng, start, end)
+
+        if len(points) == 0:
+            raise PlaceNotFoundError(place_name)
 
         self.collected_data[place_name] = points
 
