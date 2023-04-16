@@ -1,1 +1,8 @@
+.venv
+.local
 .history
+.env
+.mypy_cache
+.vscode
+.Python
+__pycache__

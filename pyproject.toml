@@ -1,0 +1,25 @@
+[project]
+name = "air-ai"
+version = "1.0.0"
+description = "GPT-powered application to aggregate information about air quality"
+requires-python = ">=3.10"
+license = {text = "MIT License"}
+
+[tool.black]
+line-length = 89
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | .local
+  | .history
+)/
+'''

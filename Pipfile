@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = false
+name = "pip_conf_index_global"
+
+[packages]
+starlette = "*"
+uvicorn = "*"
+fastapi = "*"
+python-dotenv = "*"
+langchain = "*"
+openai = "*"
+
+[dev-packages]
+mypy = "*"
+pre-commit = "*"
+flake8 = "*"
+black = "*"
+
+[requires]
+python_version = "3.10"
