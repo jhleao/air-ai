@@ -46,7 +46,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-$height: 38px;
+$height: 40px;
 $radius: 0.5rem;
 $border-thickness: 1px;
 

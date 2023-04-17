@@ -5,6 +5,7 @@
       :submitDisabled="view === View.Loading"
       @update="onInputChange"
       @submit="onSubmit"
+      type="text"
       placeholder="How does the air in my city compare to Dhaka?"
       maxlength="150"
     />

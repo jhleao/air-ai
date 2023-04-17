@@ -1,12 +1,15 @@
 <template>
-  <div class="container">
-    <div>
+  <div class="result-container">
+    <div class="summary-container">
       <h5 class="title">Result</h5>
       <p class="text">
         {{ result.answer }}
       </p>
     </div>
-    <div v-if="result.facts?.length">
+    <div class='cards-container'  v-if="result.auxiliary_data?.length">
+      <AirQualityCard class="fact" v-for="place in result.auxiliary_data" :key="place.location_name" :data="place"/>
+    </div>
+    <div class='facts-container' v-if="result.facts?.length">
       <h5 class="title">Facts</h5>
       <p class="text">
         <ul>
@@ -20,23 +23,28 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { AirAiResult } from '@/util/schema';
+import AirQualityCard from './AirQualityCard/AirQualityCard.vue';
 
 export default defineComponent({
-  props: {
-    result: {
-      type: AirAiResult,
-      required: true
-    }
-  }
+  components: { AirQualityCard },
+    props: {
+        result: {
+            type: AirAiResult,
+            required: true
+        }
+    },
 });
 </script>
 
 <style scoped lang="scss">
-.container {
+.result-container {
   margin: 0 auto;
-  width: 100%;
-  max-width: 500px;
   margin-top: 1rem;
+}
+
+.summary-container {
+  max-width: $content-width;
+  margin: 0 auto;
 }
 
 .title {
@@ -48,13 +56,33 @@ export default defineComponent({
 
 .text {
   font-size: 1rem;
-  line-height: 1.1rem;
+  line-height: 1.5rem;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  max-width: $content-width;
   color: $gray600;
+  margin: 0 auto;
+}
+
+.facts-container {
+  max-width: $content-width;
+  margin: 0 auto;
 }
 
 .fact {
+  line-height: 1.5rem;
   margin-bottom: 1rem;
+}
+
+.cards-container {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 </style>
