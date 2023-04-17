@@ -2,6 +2,8 @@
 
 A GPT-based assistant able to look up real-time air quality information throughout the world.
 
+![Air AI Banner](.github/banner.png)
+
 ### Requirements
 
 - [Python](https://github.com/asdf-community/asdf-python) 3.10
