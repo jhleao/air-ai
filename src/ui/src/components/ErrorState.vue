@@ -2,7 +2,7 @@
   <div class="container">
     <p class="title">Oopsies...</p>
     <p class="text">
-      I ran into issues while trying to resolve your request. Try changing your prompt or
+      I ran into issues while trying to resolve your request. <br>Try changing your prompt or
       <span class="link" @click="$emit('tryAgain')">try again</span>.
     </p>
   </div>
@@ -15,7 +15,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  max-width: 350px;
+  max-width: 400px;
   text-align: center;
   gap: 0.3rem;
   margin-top: 0.5rem;
@@ -30,6 +30,7 @@
 .text {
   font-size: 1rem;
   color: $gray500;
+  line-height: 1.1rem;
 }
 
 .link {

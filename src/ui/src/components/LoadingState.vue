@@ -61,5 +61,6 @@ export default defineComponent({
 .text{
   font-size: 0.9rem;
   color: $gray500;
+  line-height: 1.1rem;
 }
 </style>
