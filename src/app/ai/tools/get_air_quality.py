@@ -16,6 +16,9 @@ class GetAirQualityTool(BaseTool):
             description=""""
             Use this to find air quality measurements of one single place.
             Only ask for one place's information at a time.
+            Only provide valid location names.
+            Invalid location name: "Human's city"
+            Valid location name: "New York"
             Input must be JSON formatted with one property called "place" and one called "date", in ISO-8601 format.
             """,
         )
