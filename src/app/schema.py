@@ -19,6 +19,11 @@ class AirDataPoint(BaseModel):
     pm2_5: float
     o3: float
     co: float
+    no: float
+    no2: float
+    so2: float
+    pm10: float
+    nh3: float
 
 
 class LocationAirData(BaseModel):

@@ -71,12 +71,29 @@ class OpenWeatherMapApi:
                 aqi = OpenWeatherMapUtils.calculate_aqi_pm2_5(
                     data_point.get("components").get("pm2_5")
                 )
+
                 pm2_5 = round(data_point.get("components").get("pm2_5"), 2)
                 o3 = round(data_point.get("components").get("o3"), 2)
                 co = round(data_point.get("components").get("co"), 2)
+                no = round(data_point.get("components").get("no"), 2)
+                no2 = round(data_point.get("components").get("no2"), 2)
+                so2 = round(data_point.get("components").get("so2"), 2)
+                pm10 = round(data_point.get("components").get("pm10"), 2)
+                nh3 = round(data_point.get("components").get("nh3"), 2)
+
                 formatted = AirDataPoint(
-                    date_unix=date_unix, aqi=aqi, pm2_5=pm2_5, o3=o3, co=co
+                    date_unix=date_unix,
+                    aqi=aqi,
+                    pm2_5=pm2_5,
+                    o3=o3,
+                    co=co,
+                    no=no,
+                    no2=no2,
+                    so2=so2,
+                    pm10=pm10,
+                    nh3=nh3,
                 )
+
                 formatted_data.append(formatted)
 
             # We always want them by day. OWM only provides hour granularity

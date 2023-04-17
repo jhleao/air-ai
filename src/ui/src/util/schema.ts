@@ -8,17 +8,22 @@ export class AirAiResult {
     this.facts = facts;
     this.auxiliary_data = auxiliary_data;
   }
-};
+}
 
-type LocationAirData = {
-  location_name: string;
-  data: AirDataPoint[];
-};
+export class LocationAirData {
+  location_name: string = '';
+  data: AirDataPoint[] = [];
+}
 
-type AirDataPoint = {
+export type AirDataPoint = {
   date_unix: number;
   aqi: number;
   pm2_5: number;
   o3: number;
   co: number;
+  no: number;
+  no2: number;
+  so2: number;
+  pm10: number;
+  nh3: number;
 };

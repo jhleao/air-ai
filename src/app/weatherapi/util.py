@@ -21,6 +21,11 @@ class OpenWeatherMapUtils:
                 o3=(air_data_1.o3 + air_data_2.o3) / 2,
                 pm2_5=(air_data_1.pm2_5 + air_data_2.pm2_5) / 2,
                 co=(air_data_1.co + air_data_2.co) / 2,
+                no=(air_data_1.no + air_data_2.no) / 2,
+                no2=(air_data_1.no2 + air_data_2.no2) / 2,
+                so2=(air_data_1.so2 + air_data_2.so2) / 2,
+                pm10=(air_data_1.pm10 + air_data_2.pm10) / 2,
+                nh3=(air_data_1.nh3 + air_data_2.nh3) / 2,
                 date_unix=air_data_1.date_unix,
             )
 
