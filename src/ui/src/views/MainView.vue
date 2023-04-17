@@ -8,6 +8,9 @@
       placeholder="How does the air in my city compare to Dhaka?"
       maxlength="150"
     />
+    <LoadingState v-if="view === View.Loading" />
+    <ErrorState v-if="view === View.Error" @tryAgain="onSubmit" />
+    <GreetingText v-if="view === View.Greeting" />
   </div>
 </template>
 
@@ -17,7 +20,9 @@ import PromptInput from '@/components/PromptInput.vue';
 
 enum View {
   Greeting = 'GREETING',
-  Loading = 'LOADING'
+  Loading = 'LOADING',
+  Error = 'ERROR',
+  Result = 'RESULT'
 }
 
 export default defineComponent({
