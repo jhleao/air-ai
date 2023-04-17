@@ -27,3 +27,8 @@ export type AirDataPoint = {
   pm10: number;
   nh3: number;
 };
+
+export type LatLng = {
+  lat: number;
+  lng: number;
+}

@@ -11,6 +11,7 @@
     />
     <LoadingState v-if="view === View.Loading" />
     <ErrorState v-if="view === View.Error" @tryAgain="onSubmit" />
+    <UnavailableLocation v-if="view === View.UnavailableLocation" />
     <GreetingText v-if="view === View.Greeting" />
     <AirAiResultView v-if="view === View.Result && result" :result="result" />
   </div>
@@ -23,20 +24,31 @@ import AirAiResultView from '../components/AirAiResultView.vue';
 import ErrorState from '../components/ErrorState.vue';
 import GreetingText from '../components/GreetingText.vue';
 import LoadingState from '../components/LoadingState.vue';
+import UnavailableLocation from '../components/UnavailableLocation.vue';
 import { AirAiApi } from '../util/api';
-import type { AirAiResult } from '../util/schema';
+import { LocationUtil } from '../util/location';
+import type { AirAiResult, LatLng } from '../util/schema';
 
 enum View {
   Greeting = 'GREETING',
   Loading = 'LOADING',
   Error = 'ERROR',
-  Result = 'RESULT'
+  Result = 'RESULT',
+  UnavailableLocation = 'UNAVAILABLE_LOCATION'
 }
 
 export default defineComponent({
-  components: { PromptInput, LoadingState, GreetingText, AirAiResultView, ErrorState },
+  components: {
+    PromptInput,
+    LoadingState,
+    GreetingText,
+    AirAiResultView,
+    ErrorState,
+    UnavailableLocation
+  },
   setup() {
     const inputValue = ref('');
+    const location = ref<LatLng | null>(null);
     const view = ref(View.Greeting);
     const result = ref<AirAiResult | null>(null);
 
@@ -49,11 +61,22 @@ export default defineComponent({
       view.value = View.Loading;
       const prompt = inputValue.value;
       try {
-        const apiResponse = await AirAiApi.prompt(prompt);
+        const apiResponse = await AirAiApi.prompt(prompt, location.value);
         result.value = apiResponse;
         view.value = View.Result;
-      } catch {
-        view.value = View.Error;
+      } catch (e) {
+        if ((e as Response)?.status !== 422) {
+          view.value = View.Error;
+          return;
+        }
+
+        const errorCode = (await (e as Response).json()).code;
+        if (errorCode !== 'ERR_NO_USER_LOCATION') throw new Error();
+        const hasLocation = await LocationUtil.hasLocationEnabled();
+        if(!hasLocation) view.value = View.UnavailableLocation;
+        location.value = await LocationUtil.getLocation();
+        // Retry with location
+        if(location.value) onSubmit();
       }
     };
 
