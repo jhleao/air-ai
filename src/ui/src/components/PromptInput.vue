@@ -30,7 +30,7 @@ export default defineComponent({
   },
   methods: {
     onChange(e: Event) {
-      this.$emit('update', e?.target?.value ?? '')
+      this.$emit('update', (e?.target as HTMLInputElement)?.value ?? '')
     },
     onKeypress(e: KeyboardEvent) {
       if (e?.key === 'Enter') {
