@@ -14,7 +14,8 @@
   margin: 0 auto;
   max-width: 280px;
   text-align: center;
-  gap: 0.8rem
+  gap: 0.8rem;
+  height: $header-height;
 }
 
 .title {

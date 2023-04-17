@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import SpinnerIcon from '@/components/icons/SpinnerIcon.vue';
+import SpinnerIcon from '@/components/Icons/SpinnerIcon.vue';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({

@@ -14,6 +14,7 @@
     <UnavailableLocation v-if="view === View.UnavailableLocation" />
     <GreetingText v-if="view === View.Greeting" />
     <AirAiResultView v-if="view === View.Result && result" :result="result" />
+    <ViewOnGithub />
   </div>
 </template>
 
@@ -25,6 +26,7 @@ import ErrorState from '../components/ErrorState.vue';
 import GreetingText from '../components/GreetingText.vue';
 import LoadingState from '../components/LoadingState.vue';
 import UnavailableLocation from '../components/UnavailableLocation.vue';
+import ViewOnGithub from '../components/ViewOnGithub.vue';
 import { AirAiApi } from '../util/api';
 import { LocationUtil } from '../util/location';
 import type { AirAiResult, LatLng } from '../util/schema';
@@ -44,6 +46,7 @@ export default defineComponent({
     GreetingText,
     AirAiResultView,
     ErrorState,
+    ViewOnGithub,
     UnavailableLocation
   },
   setup() {
@@ -93,5 +96,6 @@ export default defineComponent({
   align-items: center;
   gap: 1rem;
   width: 100%;
+  flex: 1;
 }
 </style>
