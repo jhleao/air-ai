@@ -6,7 +6,7 @@
       @update="onInputChange"
       @submit="onSubmit"
       type="text"
-      placeholder="How does the air in my city compare to Dhaka's?"
+      placeholder="How does the air in my city compare to Dhaka?"
       maxlength="150"
     />
     <LoadingState v-if="view === View.Loading" />

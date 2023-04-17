@@ -32,7 +32,7 @@ export default defineComponent({
 
     intervalId.value = window.setInterval(() => {
       label.value = randomLabel();
-    }, 1200);
+    }, 1500);
 
     return {
       label,
