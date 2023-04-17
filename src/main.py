@@ -1,8 +1,5 @@
 import os
 import uvicorn
-from dotenv import load_dotenv
-
-load_dotenv()
 
 __DEV__ = os.getenv("ENV_NAME") == "dev"
 port = int(os.getenv("PORT", 8000))
