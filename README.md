@@ -1,4 +1,4 @@
-# 😷 AirAI
+# AirAI
 
 A GPT-based assistant able to look up real-time air quality information throughout the world.
 
@@ -60,7 +60,7 @@ yarn dev
 - [Vue.js 3.x](https://vuejs.org/) (with [Composition API](https://vuejs.org/guide/extras/composition-api-faq.html) and [SFCs](https://vuejs.org/guide/scaling-up/sfc.html))
   - - [TypeScript](https://www.typescriptlang.org/), [ESLint](https://eslint.org/), [Prettier](https://prettier.io/), [Yarn](https://yarnpkg.com/),
 - [FastAPI](https://fastapi.tiangolo.com/) and [LangChain](https://python.langchain.com/en/latest/index.html) for interfacing with LLMs
-  - - [Pipenv](https://pipenv.pypa.io/en/latest/), [flake8](https://flake8.pycqa.org/en/latest/), [black](https://github.com/psf/black, [mypy](https://mypy-lang.org/), [aiohttp](https://docs.aiohttp.org/en/stable/)
+  - - [Pipenv](https://pipenv.pypa.io/en/latest/), [flake8](https://flake8.pycqa.org/en/latest/), [black](https://github.com/psf/black), [mypy](https://mypy-lang.org/), [aiohttp](https://docs.aiohttp.org/en/stable/)
 
 ### Potential improvements
 
