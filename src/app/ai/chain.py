@@ -16,6 +16,9 @@ from .prompts import (
 from .tools import LocateUserTool, AskPretrainedTool, GetAirQualityTool
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 __DEV__ = os.getenv("ENV_NAME") == "dev"
 

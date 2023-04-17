@@ -8,8 +8,8 @@ class LocateUserTool(BaseTool):
 
     def __init__(self, user_lat_lng: LatLng | None):
         super().__init__(
-            name="locate-user-tool",
-            description="Use this tool when you need to find out where the user is.",
+            name="locate-user",
+            description="Use this tool when you need to find out where the user is. Use this when the human mentions 'my city', 'my location', 'here', 'my air', etc.",
             user_lat_lng=user_lat_lng,  # type: ignore
         )
 
