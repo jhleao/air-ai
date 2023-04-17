@@ -43,7 +43,8 @@ export default defineComponent({
 }
 
 .summary-container {
-  max-width: $content-width;
+  max-width: $max-content-width;
+  min-width: $min-content-width;
   margin: 0 auto;
 }
 
@@ -58,13 +59,15 @@ export default defineComponent({
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 400;
-  max-width: $content-width;
+  max-width: $max-content-width;
+  min-width: $min-content-width;
   color: $gray600;
   margin: 0 auto;
 }
 
 .facts-container {
-  max-width: $content-width;
+  max-width: $max-content-width;
+  min-width: $min-content-width;
   margin: 0 auto;
 }
 
